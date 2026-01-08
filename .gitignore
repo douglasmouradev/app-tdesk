@@ -1,0 +1,30 @@
+# macOS artefacts
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Cache/temporary directories
+tmp/
+.cache/
+
+# Composer/vendor directory (PHP deps)
+vendor/
+
+# IDE files
+.idea/
+.vscode/
+
+# Arquivos de ambiente (CONTÉM INFORMAÇÕES SENSÍVEIS!)
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.bak
+config.php.bak
+
+# Uploads de usuários (anexos de chamados)
+public/uploads/
+
