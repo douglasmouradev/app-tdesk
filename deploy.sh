@@ -43,8 +43,35 @@ echo "   ✅ Diretório .well-known/acme-challenge criado"
 # Verificar .env
 if [ ! -f .env ]; then
     echo "⚠️  Arquivo .env não encontrado!"
-    echo "   Copiando .env.example..."
-    cp .env.example .env
+    if [ -f "env.template" ]; then
+        echo "   Copiando env.template..."
+        cp env.template .env
+    else
+        echo "   Criando arquivo .env básico..."
+        cat > .env << 'ENVFILE'
+APP_NAME="TDesk Solutions"
+APP_TIMEZONE="America/Sao_Paulo"
+APP_URL="https://app.tdesksolutions.com.br"
+APP_ENV="production"
+APP_DEBUG="false"
+DB_HOST="127.0.0.1"
+DB_PORT="3306"
+DB_NAME="tdesk_solutions"
+DB_USERNAME="root"
+DB_PASSWORD=""
+DB_CHARSET="utf8mb4"
+SESSION_NAME="tdesk_session"
+PASSWORD_ALGO="PASSWORD_DEFAULT"
+APP_KEY=""
+CSRF_TOKEN_EXPIRY="3600"
+MAIL_FROM="no-reply@tdesksolutions.com.br"
+MAIL_HOST=""
+MAIL_PORT="587"
+MAIL_USERNAME=""
+MAIL_PASSWORD=""
+MAIL_ENCRYPTION="tls"
+ENVFILE
+    fi
     chmod 600 .env
     echo "   ⚠️  Configure o arquivo .env antes de continuar!"
     echo "   nano $APP_DIR/.env"
