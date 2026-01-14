@@ -26,6 +26,12 @@ fi
 
 cd $APP_DIR
 
+# Configurar Git para permitir o diretório (resolver "dubious ownership")
+if [ -d ".git" ]; then
+    echo "🔧 Configurando Git..."
+    git config --global --add safe.directory $APP_DIR 2>/dev/null || true
+fi
+
 # Configurar permissões
 echo "📁 Configurando permissões..."
 chown -R www-data:www-data .
