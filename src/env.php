@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @param mixed $default Valor padrão se não encontrado
  * @return mixed
  */
+if (!function_exists('env')) {
 function env(string $key, $default = null)
 {
     static $env = null;
@@ -51,10 +52,12 @@ function env(string $key, $default = null)
     
     return $env[$key] ?? (getenv($key) !== false ? getenv($key) : $default);
 }
+}
 
 /**
  * Valida se todas as variáveis de ambiente obrigatórias estão definidas
  */
+if (!function_exists('validate_env')) {
 function validate_env(): void
 {
     $required = [
@@ -76,5 +79,6 @@ function validate_env(): void
             '. Verifique o arquivo .env'
         );
     }
+}
 }
 
