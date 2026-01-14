@@ -6,7 +6,19 @@
     Deny from all
 </FilesMatch>
 
-# Não servir arquivos ocultos
+# Permitir .well-known para Let's Encrypt (ACME Challenge)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} ^/.well-known/acme-challenge/
+    RewriteRule ^ - [L]
+</IfModule>
+
+<DirectoryMatch "^.*/\.well-known/">
+    Order allow,deny
+    Allow from all
+</DirectoryMatch>
+
+# Não servir outros arquivos ocultos (exceto .well-known)
 <FilesMatch "^\.">
     Order allow,deny
     Deny from all

@@ -33,6 +33,13 @@ chmod -R 755 .
 chmod -R 775 public/
 chmod 600 .env 2>/dev/null || echo "   .env ainda não existe (será criado)"
 
+# Criar diretório .well-known para Let's Encrypt (ACME Challenge)
+echo "🔐 Criando diretório .well-known para SSL..."
+mkdir -p public/.well-known/acme-challenge
+chown -R www-data:www-data public/.well-known
+chmod -R 755 public/.well-known
+echo "   ✅ Diretório .well-known/acme-challenge criado"
+
 # Verificar .env
 if [ ! -f .env ]; then
     echo "⚠️  Arquivo .env não encontrado!"
